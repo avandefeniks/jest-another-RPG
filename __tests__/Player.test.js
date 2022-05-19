@@ -20,7 +20,7 @@ test("creates a player as an object", () => {
         expect.arrayContaining([expect.any(Object)])
     );
 
-    console.log(new Potion());
+    // console.log(new Potion());
 });
 
 test("gets player's stats as an object", () => {
