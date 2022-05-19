@@ -8,20 +8,20 @@ const Player = require('../lib/Player');
 const { exportAllDeclaration } = require('@babel/types');
 
 
-// test("creates a player as an object", () => {
-//     const player = new Player('Dave');
+test("creates a player as an object", () => {
+    const player = new Player('Dave');
 
-//     expect(player.name).toBe('Dave');
-//     expect(player.health).toEqual(expect.any(Number));
-//     expect(player.strength).toEqual(expect.any(Number));
-//     expect(player.agility).toEqual(expect.any(Number));
+    expect(player.name).toBe('Dave');
+    expect(player.health).toEqual(expect.any(Number));
+    expect(player.strength).toEqual(expect.any(Number));
+    expect(player.agility).toEqual(expect.any(Number));
 
-//     expect(player.inventory).toEqual (
-//         expect.arrayContaining([expect.any(Object)])
-//     );
+    expect(player.inventory).toEqual (
+        expect.arrayContaining([expect.any(Object)])
+    );
 
-//     console.log(new Potion());
-// });
+    console.log(new Potion());
+});
 
 test("gets player's stats as an object", () => {
     const player = new Player('Dave');
@@ -70,4 +70,33 @@ test("gets player's stats as an object", () => {
 
     expect(player.health).toBe(0);
 
+  });
+
+  test("gets player's attack value", () => {
+      const player = new Player('Dave');
+      player.strength = 10;
+
+      expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
+      expect(player.getAttackValue()).toBeLessThanOrEqual(15);
+  }); 
+
+  test('add a potion to the inventory', () => {
+      const player = new Player('Dave');
+      const oldCount = player.inventory.length;
+
+      player.addPotion(new Potion());
+
+      expect(player.inventory.length).toBeGreaterThan(oldCount);
+
+    //   console.log(new Potion());
+  });
+
+  test('uses potion from inventory', () => {
+      const player = new Player('Dave');
+      player.inventory = [new Potion(), new Potion(), new Potion()];
+      const oldCount = player.inventory.length;
+
+      player.usePotion(1);
+
+      expect(player.inventory.length).toBeLessThan(oldCount);
   });
